@@ -93,7 +93,7 @@ async function main(): Promise<number> {
     .description('Aggregate AI news updates from multiple sources')
     .option('--output-dir <dir>', 'Directory for output JSON files', 'data')
     .option('--window-hours <hours>', '24h window size', '24')
-    .option('--archive-days <days>', 'Keep archive for N days', '45')
+    .option('--archive-days <days>', 'Keep archive for N days', '20')
     .option('--translate-max-new <count>', 'Max new EN->ZH title translations per run', '80')
     .option('--rss-opml <path>', 'Optional OPML file path to include RSS sources', CONFIG.rss.defaultOpmlPath)
     .option('--rss-max-feeds <count>', 'Optional max OPML RSS feeds to fetch (0 means all)', '0')
@@ -403,7 +403,7 @@ async function main(): Promise<number> {
   console.log('💾 Writing output files...');
   await writeJson(latest24hPath, latest24hPayload);
   await writeJson(latest7dPath, latest7dPayload);
-  await writeJson(archivePath, archivePayload);
+  await writeJson(archivePath, archivePayload, true);
   await writeJson(statusPath, statusPayload);
   await writeJson(waytoagiPath, waytoagiPayload);
   await writeJson(titleCachePath, cacheToPojo(titleCache));
